@@ -10,14 +10,14 @@ MongoClient.connect(url, (error, client) => {
         .then(client => {
             console.log('Connected to MongoDB')
             const db = client.db('star-wars-quotes')
-            const quotesCollection = db.collection('casts')
+            const quotesCollection = db.collection('quotes')
             app.set('view engine', 'ejs');
             app.use(bodyParser.urlencoded({extended: true}));
             app.get('/', (request, response) => {
                 quotesCollection.find().toArray()
                     .then(results => {
                         console.log(results)
-                        response.render('cast.ejs',  { casts: results
+                        response.render('index.ejs',  { quotes: results
                         })
                     })
                     .catch(error => console.error(error))
@@ -31,5 +31,9 @@ MongoClient.connect(url, (error, client) => {
                     })
                     .catch(error => console.error(error))
             })
+            app.listen(8000, ()  => {
+                console.log('listening on port 8000')
             })
-        })
+            })
+        .catch(error => console.error(error))
+})
