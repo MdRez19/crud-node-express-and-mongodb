@@ -18,7 +18,7 @@ MongoClient.connect(url, (error, client) => {
                 // quotesCollection.find().toArray()
                 castsCollection.find().toArray()
                     .then(results => {
-                        console.log(results)
+                        // console.log(results)
                         // response.render('index.ejs',  { quotes: results })
                         response.render('casts.ejs',  { casts: results })
                     })
