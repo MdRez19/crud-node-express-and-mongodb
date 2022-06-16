@@ -5,6 +5,8 @@ const MongoClient = require('mongodb').MongoClient;
 const dotenv = require('dotenv').config();
 const url = process.env.MONGOLAB_URI;
 
+const PORT = process.env.PORT || 8000;
+
 MongoClient.connect(url, (error, client) => {
     MongoClient.connect(url)
         .then(client => {
@@ -42,8 +44,8 @@ MongoClient.connect(url, (error, client) => {
                     })
                     .catch(error => console.error(error))
             })
-            app.listen(8000, ()  => {
-                console.log('listening on port 8000')
+            app.listen(PORT, () => {
+                console.log(`The server is running on port ${PORT}! Better Go Catch it!`)
             })
             })
         .catch(error => console.error(error))
