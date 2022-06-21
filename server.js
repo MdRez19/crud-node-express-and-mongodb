@@ -70,6 +70,20 @@ MongoClient.connect(url, (error, client) => {
                 // console.log(request.body)
             })
 
+            app.delete('/quotes', (request, response) => {
+                // Handle delete event here
+                quotesCollection.deleteOne(
+                    { name: request.body.name }
+                )
+                    .then(result => {
+                        if (result.deletedCount === 0) {
+                            return response.json('No quote to delete')
+                        }
+                        response.json(`Deleted Darth Vader's quote`)
+                    })
+                    .catch(error => console.error(error))
+            })
+
             app.listen(PORT, () => {
                 console.log(`The server is running on port ${PORT}! Better Go Catch it!`)
             })
